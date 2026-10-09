@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/farm.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="farm-form-page">
+
+    <div class="farm-form-wrapper">
+
+        <!-- ==========================================
+             FORM HEADER
+        =========================================== -->
+
+        <div class="farm-form-heading">
+
+            <a href="{% url 'farm_list' %}" class="back-link">
+                ← Back to My Farms
+            </a>
+
+            <div class="heading-content">
+                <div>
+                    <span class="heading-eyebrow">
+                        FARM MANAGEMENT
+                    </span>
+
+                    <h1>{{ page_title }}</h1>
+
+                    <p>
+                        Add and manage your poultry farm information.
+                    </p>
+                </div>
+
+                <div class="heading-icon">
+                    🐔
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             FORM CARD
+        =========================================== -->
+
+        <div class="farm-form-card">
+
+            <div class="form-card-header">
+                <h2>Farm Information</h2>
+
+                <p>
+                    Fill in the details below to
+                    {% if farm %}
+                    update this farm.
+                    {% else %}
+                    create a new farm.
+                    {% endif %}
+                </p>
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- ==================================
+                     FARM NAME
+                =================================== -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        <span class="section-number">01</span>
+
+                        <div>
+                            <h3>Basic Information</h3>
+                            <p>Tell us about your farm.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Farm Name
+                            <span>*</span>
+                        </label>
+
+                        <input type="text" id="name" name="name" value="{{ farm.name|default:'' }}"
+                            placeholder="e.g. Green Valley Poultry Farm" autocomplete="off" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                            <span>*</span>
+                        </label>
+
+                        <input type="text" id="location" name="location" value="{{ farm.location|default:'' }}"
+                            placeholder="e.g. Gazipur, Bangladesh" required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================
+                     FARM TYPE & CAPACITY
+                =================================== -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <span class="section-number">02</span>
+
+                        <div>
+                            <h3>Farm Details</h3>
+                            <p>Configure the type and capacity.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="farm_type">
+                                Farm Type
+                                <span>*</span>
+                            </label>
+
+                            <select id="farm_type" name="farm_type" required>
+
+                                <option value="">
+                                    Select farm type
+                                </option>
+
+                                <option value="BROILER">
+                                    Broiler
+                                </option>
+
+                                <option value="LAYER">
+                                    Layer
+                                </option>
+
+                                <option value="SONALI">
+                                    Sonali
+                                </option>
+
+                                <option value="MIXED">
+                                    Mixed
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="capacity">
+                                Bird Capacity
+                                <span>*</span>
+                            </label>
+
+                            <input type="number" id="capacity" name="capacity" value="{{ farm.capacity|default:'' }}"
+                                placeholder="e.g. 5000" min="1" required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================
+                     START DATE
+                =================================== -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <span class="section-number">03</span>
+
+                        <div>
+                            <h3>Farm Timeline</h3>
+                            <p>Set the farm starting date.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="start_date">
+                            Farm Start Date
+                            <span>*</span>
+                        </label>
+
+                        <input type="date" id="start_date" name="start_date" value="{{ farm.start_date|date:'Y-m-d' }}"
+                            required>
+
+                        <small>
+                            The date when this farm started its operation.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================
+                     ACTIONS
+                =================================== -->
+
+                <div class="form-footer">
+
+                    <a href="{% url 'farm_list' %}" class="form-cancel">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="form-submit">
+                        <span>
+                            {% if farm %}
+                            Update Farm
+                            {% else %}
+                            Create Farm
+                            {% endif %}
+                        </span>
+
+                        <span class="submit-arrow">
+                            →
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- ==========================================
+             FORM FOOTER NOTE
+        =========================================== -->
+
+        <div class="form-note">
+
+            <span>🔒</span>
+
+            <p>
+                Your farm information is securely associated
+                with your account.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

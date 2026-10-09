@@ -1,0 +1,410 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard | Poultry Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="dashboard-container">
+
+        <!-- ==================================================
+             DASHBOARD HEADER
+        ================================================== -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <span class="dashboard-badge">
+                    🐔 Dashboard
+                </span>
+
+                <h1>
+                    Welcome back,
+                    <span>{{ username }}</span>!
+                </h1>
+
+                <p>
+                    Manage your poultry farm operations from one place.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'logout' %}"
+                class="dashboard-logout"
+            >
+                Logout
+            </a>
+
+        </div>
+
+
+        <!-- ==================================================
+             DYNAMIC STATISTICS
+        ================================================== -->
+
+        <div class="dashboard-stats">
+
+            <!-- TOTAL FARMS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🏠
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Total Farms
+                    </span>
+
+                    <strong>
+                        {{ total_farms }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE BATCHES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🐔
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Active Batches
+                    </span>
+
+                    <strong>
+                        {{ active_batches }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL EGG PRODUCTION -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🥚
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Egg Production
+                    </span>
+
+                    <strong>
+                        {{ total_egg_production }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL SALES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ৳
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Total Sales
+                    </span>
+
+                    <strong>
+                        ৳{{ total_sales|floatformat:2 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             FARM MANAGEMENT
+        ================================================== -->
+
+        <div class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Farm Management
+                    </h2>
+
+                    <p>
+                        Manage your farms and poultry operations.
+                    </p>
+
+                </div>
+
+                <a
+                    href="{% url 'farm_list' %}"
+                    class="view-all"
+                >
+                    View Farms →
+                </a>
+
+            </div>
+
+
+            <!-- ==================================================
+                 MANAGEMENT CARDS
+            ================================================== -->
+
+            <div class="management-grid">
+
+
+                <!-- FARM -->
+
+                <a
+                    href="{% url 'farm_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        🏠
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Farms
+                        </h3>
+
+                        <p>
+                            View and manage all your poultry farms.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- BATCH -->
+
+                <a
+                    href="{% url 'batch_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        🐣
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Batches
+                        </h3>
+
+                        <p>
+                            Manage poultry batches and bird information.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- DAILY RECORD -->
+
+                <a
+                    href="{% url 'daily_record_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Daily Records
+                        </h3>
+
+                        <p>
+                            Track feed, water, health and daily records.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- EGG PRODUCTION -->
+
+                <a
+                    href="{% url 'egg_production_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        🥚
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Egg Production
+                        </h3>
+
+                        <p>
+                            Monitor daily egg production and damaged eggs.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- EXPENSE -->
+
+                <a
+                    href="{% url 'expense_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        💰
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Expenses
+                        </h3>
+
+                        <p>
+                            Record and monitor farm-related expenses.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- SALE -->
+
+                <a
+                    href="{% url 'sale_list' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Sales
+                        </h3>
+
+                        <p>
+                            Manage poultry and egg sales.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             GETTING STARTED
+        ================================================== -->
+
+        <div class="dashboard-tip">
+
+            <div class="tip-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h3>
+                    Getting Started
+                </h3>
+
+                <p>
+                    Start by creating your first farm. Once your farm is
+                    created, you can add batches, daily records, egg
+                    production, expenses and sales.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'farm_create' %}"
+                class="tip-button"
+            >
+                Create Farm →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

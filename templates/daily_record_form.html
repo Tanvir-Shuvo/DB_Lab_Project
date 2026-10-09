@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} | Smart Poultry Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/record.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="record-page">
+
+    <div class="record-header">
+        <div>
+            <h1>{{ page_title }}</h1>
+            <p>Enter daily poultry farm record information.</p>
+        </div>
+    </div>
+
+    <div class="record-form-container">
+
+        <div class="record-form-card">
+
+            <div class="record-form-header">
+                <h2>Daily Record Information</h2>
+                <p>Fill in the details below.</p>
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Batch -->
+                <div class="record-form-group">
+
+                    <label for="batch_id">Batch</label>
+
+                    <select id="batch_id" name="batch_id" required>
+
+                        <option value="">Select Batch</option>
+
+                        {% for batch in batches %}
+
+                            <option
+                                value="{{ batch.id }}"
+                                {% if record and record.batch_id == batch.id %}selected{% endif %}
+                            >
+                                {{ batch.code }} — {{ batch.farm_name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Record Date -->
+                <div class="record-form-group">
+
+                    <label for="record_date">Record Date</label>
+
+                    <input
+                        type="date"
+                        id="record_date"
+                        name="record_date"
+                        value="{% if record %}{{ record.record_date|date:'Y-m-d' }}{% endif %}"
+                        required
+                    >
+
+                </div>
+
+                <!-- Feed & Water -->
+                <div class="record-form-row">
+
+                    <div class="record-form-group">
+
+                        <label for="feed_amount_kg">
+                            Feed Amount (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            id="feed_amount_kg"
+                            name="feed_amount_kg"
+                            value="{% if record %}{{ record.feed_amount_kg }}{% endif %}"
+                            placeholder="e.g. 25.50"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="record-form-group">
+
+                        <label for="water_liters">
+                            Water (liters)
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            id="water_liters"
+                            name="water_liters"
+                            value="{% if record %}{{ record.water_liters }}{% endif %}"
+                            placeholder="e.g. 50.00"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Dead & Sick -->
+                <div class="record-form-row">
+
+                    <div class="record-form-group">
+
+                        <label for="dead_count">
+                            Dead Count
+                        </label>
+
+                        <input
+                            type="number"
+                            min="0"
+                            id="dead_count"
+                            name="dead_count"
+                            value="{% if record %}{{ record.dead_count }}{% else %}0{% endif %}"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="record-form-group">
+
+                        <label for="sick_count">
+                            Sick Count
+                        </label>
+
+                        <input
+                            type="number"
+                            min="0"
+                            id="sick_count"
+                            name="sick_count"
+                            value="{% if record %}{{ record.sick_count }}{% else %}0{% endif %}"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Medicine -->
+                <div class="record-form-group">
+
+                    <div class="record-checkbox-group">
+
+                        <input
+                            type="checkbox"
+                            id="medicine_used"
+                            name="medicine_used"
+                            {% if record and record.medicine_used %}checked{% endif %}
+                        >
+
+                        <label for="medicine_used">
+                            Medicine Used
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <!-- Medicine Quantity -->
+                <div class="record-form-group">
+
+                    <label for="medicine_quantity">
+                        Medicine Quantity
+                    </label>
+
+                    <input
+                        type="text"
+                        id="medicine_quantity"
+                        name="medicine_quantity"
+                        value="{% if record %}{{ record.medicine_quantity|default:'' }}{% endif %}"
+                        placeholder="e.g. 100 ml"
+                    >
+
+                </div>
+
+                <!-- Notes -->
+                <div class="record-form-group">
+
+                    <label for="notes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        rows="5"
+                        placeholder="Enter any additional notes..."
+                    >{% if record %}{{ record.notes|default:'' }}{% endif %}</textarea>
+
+                </div>
+
+                <!-- Actions -->
+                <div class="record-form-actions">
+
+                    <a
+                        href="{% url 'daily_record_list' %}"
+                        class="record-btn record-btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="record-btn record-btn-primary"
+                    >
+                        {{ button_text }}
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

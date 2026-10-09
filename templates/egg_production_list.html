@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Egg Production{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/egg_production.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="egg-page">
+
+    <div class="egg-header">
+        <div>
+            <h1>Egg Production</h1>
+            <p>Manage daily egg production records.</p>
+        </div>
+
+        <a href="{% url 'egg_production_create' %}" class="egg-btn">
+            + Add Egg Production
+        </a>
+    </div>
+
+    {% if egg_productions %}
+
+        <div class="egg-table-wrapper">
+
+            <table class="egg-table">
+
+                <thead>
+                    <tr>
+                        <th>Farm</th>
+                        <th>Batch</th>
+                        <th>Date</th>
+                        <th>Egg Count</th>
+                        <th>Damaged Eggs</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for egg in egg_productions %}
+
+                    <tr>
+
+                        <td>
+                            {{ egg.farm_name }}
+                        </td>
+
+                        <td>
+                            {{ egg.batch_code }}
+                        </td>
+
+                        <td>
+                            {{ egg.production_date }}
+                        </td>
+
+                        <td>
+                            {{ egg.egg_count }}
+                        </td>
+
+                        <td>
+                            {{ egg.damaged_egg_count }}
+                        </td>
+
+                        <td>
+                            {% if egg.notes %}
+                                {{ egg.notes }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td class="egg-actions">
+
+                            <a
+                                href="{% url 'egg_production_update' egg.id %}"
+                                class="egg-edit-btn"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="{% url 'egg_production_delete' egg.id %}"
+                                class="egg-delete-btn"
+                            >
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="egg-empty">
+
+            <h2>No Egg Production Records</h2>
+
+            <p>
+                No egg production record has been added yet.
+            </p>
+
+            <a
+                href="{% url 'egg_production_create' %}"
+                class="egg-btn"
+            >
+                Add First Record
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

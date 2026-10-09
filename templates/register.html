@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Create Account | Smart Poultry Management System
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <!-- =========================
+         LEFT INTRO
+         ========================= -->
+
+        <div class="auth-intro">
+
+            <span class="hero-badge">
+                🐔 Smart Poultry Management
+            </span>
+
+            <h1>
+                Start Managing Your
+                <span>Poultry Farm Smarter</span>
+            </h1>
+
+            <p>
+                Create your account and keep your farms,
+                batches, daily records, expenses and sales
+                organized in one place.
+            </p>
+
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Organized Farm Management</strong>
+
+                        <small>
+                            Keep all your farm information in one place.
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Track Daily Operations</strong>
+
+                        <small>
+                            Manage batches, production and daily records.
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Monitor Your Business</strong>
+
+                        <small>
+                            Keep expenses and sales records organized.
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+         REGISTRATION CARD
+         ========================= -->
+
+        <div class="auth-card">
+
+            <div class="auth-card-header">
+
+                <div class="auth-card-icon">
+                    🐔
+                </div>
+
+                <span class="section-label">
+                    CREATE ACCOUNT
+                </span>
+
+                <h2>
+                    Join Smart Poultry
+                </h2>
+
+                <p>
+                    Create your account to get started.
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="auth-error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST" class="auth-form">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Confirm your password" required>
+
+                </div>
+
+
+                <button type="submit" class="primary-button auth-submit">
+                    Create Account
+                    <span>→</span>
+                </button>
+
+            </form>
+
+
+            <div class="auth-footer">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="#">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

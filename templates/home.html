@@ -1,0 +1,441 @@
+{% extends "base.html" %}
+
+{% block title %}
+Poultry Management | Modern Poultry Farm Management
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================
+     HERO SECTION
+     ========================= -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                🐔 Smarter Poultry Management
+            </span>
+
+            <h1>
+                Modern Poultry Farm
+                <span>Management Made Simple</span>
+            </h1>
+
+            <p>
+                Manage farms, batches, daily operations,
+                egg production, expenses and sales
+                from one organized platform.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="{% url 'register' %}" class="primary-button">
+                    Get Started
+                    <span>→</span>
+                </a>
+
+                <a href="#features" class="secondary-button">
+                    Explore Features
+                </a>
+
+            </div>
+
+            <div class="hero-note">
+                <span>✓</span>
+                Organized farm management in one place
+            </div>
+
+        </div>
+
+
+        <!-- Hero Visual -->
+
+        <div class="hero-visual">
+
+            <div class="farm-card">
+
+                <div class="farm-card-top">
+
+                    <span class="farm-icon">
+                        🐔
+                    </span>
+
+                    <div>
+                        <strong>My Poultry Farm</strong>
+                        <small>Farm Management</small>
+                    </div>
+
+                </div>
+
+                <div class="farm-scene">
+
+                    <div class="sun"></div>
+
+                    <div class="cloud cloud-one"></div>
+                    <div class="cloud cloud-two"></div>
+
+                    <div class="hill hill-one"></div>
+                    <div class="hill hill-two"></div>
+
+                    <div class="chicken chicken-one">
+                        🐔
+                    </div>
+
+                    <div class="chicken chicken-two">
+                        🐥
+                    </div>
+
+                    <div class="grass"></div>
+
+                </div>
+
+                <div class="farm-card-bottom">
+
+                    <div>
+                        <small>Farm</small>
+                        <strong>Organized</strong>
+                    </div>
+
+                    <div>
+                        <small>Operations</small>
+                        <strong>Managed</strong>
+                    </div>
+
+                    <div>
+                        <small>Records</small>
+                        <strong>Tracked</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+     ========================= -->
+
+<section class="features-section" id="features">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                CORE FEATURES
+            </span>
+
+            <h2>
+                Everything You Need to
+                <span>Manage Your Farm</span>
+            </h2>
+
+            <p>
+                Keep important poultry operation information
+                organized and easy to manage.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <!-- FARM MANAGEMENT -->
+
+            <a href="{% url 'farm_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    🏡
+                </div>
+
+                <h3>
+                    Farm Management
+                </h3>
+
+                <p>
+                    Organize your farms with essential
+                    farm information in one place.
+                </p>
+
+            </a>
+
+
+            <!-- BATCH MANAGEMENT -->
+
+            <a href="{% url 'batch_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    🐔
+                </div>
+
+                <h3>
+                    Batch Management
+                </h3>
+
+                <p>
+                    Keep track of poultry batches,
+                    types, counts and important dates.
+                </p>
+
+            </a>
+
+
+            <!-- DAILY RECORDS -->
+
+            <a href="{% url 'daily_record_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Daily Records
+                </h3>
+
+                <p>
+                    Record daily feed, water, health,
+                    mortality and medicine information.
+                </p>
+
+            </a>
+
+
+            <!-- EGG PRODUCTION -->
+
+            <a href="{% url 'egg_production_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    🥚
+                </div>
+
+                <h3>
+                    Egg Production
+                </h3>
+
+                <p>
+                    Maintain organized records of
+                    egg production and damaged eggs.
+                </p>
+
+            </a>
+
+
+            <!-- EXPENSE TRACKING -->
+
+            <a href="{% url 'expense_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    💰
+                </div>
+
+                <h3>
+                    Expense Tracking
+                </h3>
+
+                <p>
+                    Record farm and batch expenses
+                    to keep financial information organized.
+                </p>
+
+            </a>
+
+
+            <!-- SALES MANAGEMENT -->
+
+            <a href="{% url 'sale_list' %}" class="feature-card">
+
+                <div class="feature-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Sales Management
+                </h3>
+
+                <p>
+                    Keep records of poultry and egg
+                    sales, quantities and prices.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HOW IT WORKS
+     ========================= -->
+
+<section class="how-section" id="how-it-works">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                SIMPLE WORKFLOW
+            </span>
+
+            <h2>
+                Manage Your Farm
+                <span>Step by Step</span>
+            </h2>
+
+            <p>
+                Start with your farm and gradually organize
+                your daily poultry operation.
+            </p>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+
+            <!-- STEP 01 -->
+
+            <a href="{% url 'farm_create' %}" class="step-card">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <div class="step-icon">
+                    🏡
+                </div>
+
+                <h3>
+                    Create Farm
+                </h3>
+
+                <p>
+                    Add your farm and its basic information.
+                </p>
+
+            </a>
+
+
+            <!-- STEP 02 -->
+
+            <a href="{% url 'batch_list' %}" class="step-card">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <div class="step-icon">
+                    🐔
+                </div>
+
+                <h3>
+                    Add Batch
+                </h3>
+
+                <p>
+                    Create poultry batches inside your farm.
+                </p>
+
+            </a>
+
+
+            <!-- STEP 03 -->
+
+            <a href="{% url 'daily_record_list' %}" class="step-card">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <div class="step-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Record Daily Data
+                </h3>
+
+                <p>
+                    Keep daily operational and health records.
+                </p>
+
+            </a>
+
+
+            <!-- STEP 04 -->
+
+            <a href="{% url 'dashboard' %}" class="step-card">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <div class="step-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Monitor & Manage
+                </h3>
+
+                <p>
+                    Use organized records to understand your operation.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+     ========================= -->
+
+<section class="cta-section">
+
+    <div class="cta-container">
+
+        <div class="cta-icon">
+            🐔
+        </div>
+
+        <h2>
+            Ready to Organize
+            Your Poultry Operation?
+        </h2>
+
+        <p>
+            Start managing your farms, batches and
+            operational records in one organized place.
+        </p>
+
+        <a href="{% url 'dashboard' %}" class="cta-button">
+            Go to Dashboard
+            <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

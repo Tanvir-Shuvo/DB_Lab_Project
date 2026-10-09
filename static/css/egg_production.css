@@ -1,0 +1,217 @@
+/* ============================================================
+   EGG PRODUCTION PAGE
+============================================================ */
+
+.egg-page,
+.egg-form-page,
+.egg-delete-page {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 50px 0 70px;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.egg-header,
+.egg-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.egg-header h1,
+.egg-form-header h1,
+.egg-delete-card h1 {
+    margin: 0 0 8px;
+}
+
+.egg-header p,
+.egg-form-header p {
+    margin: 0;
+    opacity: 0.75;
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.egg-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 7px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.egg-btn-primary {
+    background: #198754;
+    color: #fff;
+}
+
+.egg-btn-edit {
+    background: #0d6efd;
+    color: #fff;
+}
+
+.egg-btn-delete,
+.egg-btn-danger {
+    background: #dc3545;
+    color: #fff;
+}
+
+.egg-btn-secondary {
+    background: #6c757d;
+    color: #fff;
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+.egg-table-wrapper {
+    overflow-x: auto;
+}
+
+.egg-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.egg-table th,
+.egg-table td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.egg-table th {
+    font-weight: 600;
+}
+
+.egg-actions {
+    white-space: nowrap;
+}
+
+.egg-actions .egg-btn {
+    margin-right: 5px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.egg-empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.egg-empty h3 {
+    margin-bottom: 10px;
+}
+
+.egg-empty p {
+    margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.egg-form {
+    max-width: 850px;
+}
+
+.egg-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.egg-form-group {
+    margin-bottom: 20px;
+}
+
+.egg-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.egg-form-group input,
+.egg-form-group select,
+.egg-form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+.egg-form-group textarea {
+    resize: vertical;
+}
+
+.egg-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+
+/* ============================================================
+   DELETE
+============================================================ */
+
+.egg-delete-card {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.egg-delete-info {
+    margin: 25px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.egg-delete-info p {
+    margin: 8px 0;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .egg-header,
+    .egg-form-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .egg-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .egg-table {
+        min-width: 850px;
+    }
+
+}

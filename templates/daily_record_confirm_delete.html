@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Daily Record | Smart Poultry Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/record.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="record-page">
+
+    <div class="record-header">
+        <div>
+            <h1>Delete Daily Record</h1>
+            <p>Confirm before permanently deleting this daily record.</p>
+        </div>
+    </div>
+
+    <div class="record-form-container">
+
+        <div class="record-form-card">
+
+            <div class="record-form-header">
+                <h2>Confirm Deletion</h2>
+                <p>This action cannot be undone.</p>
+            </div>
+
+            <div class="record-info">
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ record.record_date }}
+                </p>
+
+                <p>
+                    <strong>Farm:</strong>
+                    {{ record.farm_name }}
+                </p>
+
+                <p>
+                    <strong>Batch:</strong>
+                    {{ record.batch_code }}
+                </p>
+
+                <p>
+                    <strong>Feed:</strong>
+                    {{ record.feed_amount_kg }} kg
+                </p>
+
+                <p>
+                    <strong>Water:</strong>
+                    {{ record.water_liters }} L
+                </p>
+
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="record-form-actions">
+
+                    <a
+                        href="{% url 'daily_record_list' %}"
+                        class="record-btn record-btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="record-btn record-action-delete"
+                    >
+                        Delete Record
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sales{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sale.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="sale-page">
+
+    <!-- ================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ================================================== -->
+
+    <div class="sale-header">
+
+        <div>
+            <h1>Sales</h1>
+            <p>Manage poultry and egg sales.</p>
+        </div>
+
+        <a href="{% url 'sale_create' %}" class="sale-btn sale-btn-primary">
+            + Add Sale
+        </a>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- SALES TABLE -->
+    <!-- ================================================== -->
+
+    <div class="sale-card">
+
+        <div class="sale-card-header">
+            <h2>Sales Records</h2>
+            <span class="sale-count">
+                {{ sales|length }} record{{ sales|length|pluralize }}
+            </span>
+        </div>
+
+
+        {% if sales %}
+
+        <div class="sale-table-wrapper">
+
+            <table class="sale-table">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Farm</th>
+                        <th>Batch</th>
+                        <th>Sale Type</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                        <th>Buyer</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for sale in sales %}
+
+                    <tr>
+
+                        <td>
+                            {{ forloop.counter }}
+                        </td>
+
+                        <td>
+                            {{ sale.sale_date|date:"d M Y" }}
+                        </td>
+
+                        <td>
+                            {{ sale.farm_name }}
+                        </td>
+
+                        <td>
+                            {{ sale.batch_code }}
+                        </td>
+
+                        <td>
+
+                            {% if sale.sale_type == "POULTRY" %}
+                                <span class="sale-badge sale-badge-poultry">
+                                    Poultry
+                                </span>
+                            {% elif sale.sale_type == "EGG" %}
+                                <span class="sale-badge sale-badge-egg">
+                                    Egg
+                                </span>
+                            {% else %}
+                                {{ sale.sale_type }}
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ sale.unit }}
+                        </td>
+
+                        <td>
+                            {{ sale.quantity }}
+                        </td>
+
+                        <td>
+                            {{ sale.unit_price }}
+                        </td>
+
+                        <td>
+                            <strong>
+                                {{ sale.quantity|floatformat:2 }}
+                                ×
+                                {{ sale.unit_price|floatformat:2 }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            {{ sale.buyer_name|default:"-" }}
+                        </td>
+
+                        <td>
+
+                            <div class="sale-actions">
+
+                                <a
+                                    href="{% url 'sale_update' sale.id %}"
+                                    class="sale-btn sale-btn-edit"
+                                >
+                                    Edit
+                                </a>
+
+                                <a
+                                    href="{% url 'sale_delete' sale.id %}"
+                                    class="sale-btn sale-btn-delete"
+                                >
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <!-- ================================================== -->
+        <!-- EMPTY STATE -->
+        <!-- ================================================== -->
+
+        <div class="sale-empty">
+
+            <div class="sale-empty-icon">
+                💰
+            </div>
+
+            <h3>No sales recorded yet</h3>
+
+            <p>
+                Start recording your poultry or egg sales.
+            </p>
+
+            <a
+                href="{% url 'sale_create' %}"
+                class="sale-btn sale-btn-primary"
+            >
+                + Add First Sale
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

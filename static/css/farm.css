@@ -1,0 +1,1332 @@
+/* ============================================================
+   FARM PAGE
+============================================================ */
+
+.farm-page,
+.farm-form-page {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 50px 0 70px;
+}
+
+
+/* ============================================================
+   FARM HEADER
+============================================================ */
+
+.farm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 38px;
+}
+
+.farm-header h1 {
+    margin: 0 0 8px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1f292e;
+}
+
+.farm-header p {
+    margin: 0;
+    font-size: 15px;
+    color: #78838a;
+}
+
+.farm-eyebrow {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #1f7a4d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #1f7a4d;
+    color: #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(31, 122, 77, 0.18);
+}
+
+.btn-primary:hover {
+    opacity: 0.92;
+}
+
+.btn-secondary {
+    background: #eef1f4;
+    color: #263238;
+}
+
+.btn-edit {
+    background: #eaf3ff;
+    color: #1769aa;
+}
+
+.btn-delete {
+    background: #fff0f0;
+    color: #c62828;
+}
+
+
+/* ============================================================
+   FARM CAROUSEL
+============================================================ */
+
+.farm-carousel-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* ============================================================
+   FARM CAROUSEL TRACK
+============================================================ */
+
+.farm-carousel {
+    width: 100%;
+
+    display: grid;
+    grid-auto-flow: column;
+
+    grid-auto-columns: calc((100% - 40px) / 3);
+
+    gap: 20px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+
+    padding: 8px 4px 18px;
+
+    scrollbar-width: none;
+}
+
+.farm-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ============================================================
+   FARM CARD
+============================================================ */
+
+.farm-card {
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebef;
+    border-radius: 16px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.06);
+
+    scroll-snap-align: start;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.farm-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.09);
+}
+
+
+/* ============================================================
+   FARM CARD HEADER
+============================================================ */
+
+.farm-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.farm-card-title {
+    min-width: 0;
+}
+
+.farm-card-header h2 {
+    margin: 0 0 10px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #263238;
+
+    word-break: break-word;
+}
+
+.farm-type {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    background: #eaf7ef;
+    color: #1f7a4d;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.farm-card-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #eaf7ef;
+
+    font-size: 20px;
+}
+
+
+/* ============================================================
+   FARM DETAILS
+============================================================ */
+
+.farm-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
+    margin-bottom: 23px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 11px;
+
+    border-bottom: 1px solid #f0f2f4;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-size: 13px;
+    color: #7a858d;
+}
+
+.detail-value {
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #263238;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+/* ============================================================
+   FARM ACTIONS
+============================================================ */
+
+.farm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.farm-actions .btn {
+    flex: 1;
+
+    min-height: 40px;
+    padding: 0 12px;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   CAROUSEL ARROWS
+============================================================ */
+
+.carousel-arrow {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid #e1e7e4;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #344047;
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 18px rgba(20, 35, 30, 0.08);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+    background: #1f7a4d;
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(31, 122, 77, 0.20);
+}
+
+.carousel-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+
+    box-shadow: none;
+}
+
+
+/* ============================================================
+   CAROUSEL INDICATOR
+============================================================ */
+
+.carousel-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 6px;
+
+    padding: 0 60px;
+
+    color: #8a959b;
+
+    font-size: 11px;
+}
+
+.carousel-count {
+    color: #66737a;
+    font-weight: 700;
+}
+
+.carousel-hint {
+    color: #9aa3a8;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.empty-state {
+    max-width: 620px;
+
+    margin: 50px auto 0;
+    padding: 55px 35px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e7ebef;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf7ef;
+
+    font-size: 32px;
+}
+
+.empty-state h2 {
+    margin: 0 0 10px;
+
+    font-size: 25px;
+    color: #263238;
+}
+
+.empty-state p {
+    max-width: 450px;
+
+    margin: 0 auto 25px;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    color: #78838a;
+}
+
+
+/* ============================================================
+   FARM FORM
+============================================================ */
+
+.farm-form-page {
+    width: min(1000px, 92%);
+
+    margin: 0 auto;
+
+    padding: 42px 0 70px;
+}
+
+.farm-form-wrapper {
+    width: 100%;
+}
+
+
+/* ============================================================
+   FORM HEADING
+============================================================ */
+
+.farm-form-heading {
+    margin-bottom: 28px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 22px;
+
+    color: #65727b;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #1f7a4d;
+}
+
+.heading-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.heading-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #1f7a4d;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.heading-content h1 {
+    margin: 0 0 8px;
+
+    font-size: 36px;
+    line-height: 1.15;
+
+    font-weight: 750;
+
+    color: #1f292e;
+}
+
+.heading-content p {
+    margin: 0;
+
+    color: #78838a;
+
+    font-size: 14px;
+}
+
+.heading-icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 18px;
+
+    background: #eaf7ef;
+
+    font-size: 30px;
+}
+
+
+/* ============================================================
+   FORM CARD
+============================================================ */
+
+.farm-form-card {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e6ebee;
+    border-radius: 20px;
+
+    box-shadow:
+        0 14px 45px rgba(20, 35, 30, 0.07);
+}
+
+.form-card-header {
+    padding: 28px 34px;
+
+    background: #fbfcfc;
+
+    border-bottom: 1px solid #edf0f2;
+}
+
+.form-card-header h2 {
+    margin: 0 0 7px;
+
+    color: #263238;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.form-card-header p {
+    margin: 0;
+
+    color: #7a858c;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   FORM BODY
+============================================================ */
+
+.farm-form-card form {
+    padding: 34px;
+}
+
+.form-section {
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+
+    border-bottom: 1px solid #edf0f2;
+}
+
+.form-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-section-title {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    margin-bottom: 24px;
+}
+
+.section-number {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #eaf7ef;
+    color: #1f7a4d;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.form-section-title h3 {
+    margin: 0 0 4px;
+
+    color: #2c383e;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.form-section-title p {
+    margin: 0;
+
+    color: #89939a;
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   FORM ROW
+============================================================ */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* ============================================================
+   FORM GROUP
+============================================================ */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #344047;
+
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.form-group label span {
+    color: #d64545;
+    margin-left: 2px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 48px;
+
+    box-sizing: border-box;
+
+    padding: 0 14px;
+
+    border: 1px solid #dfe5e8;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+    color: #273238;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #adb5ba;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #cbd4d8;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1f7a4d;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(31, 122, 77, 0.09);
+}
+
+.form-group small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #9aa3a8;
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   FORM FOOTER
+============================================================ */
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 28px;
+}
+
+.form-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 100px;
+    height: 45px;
+
+    box-sizing: border-box;
+
+    padding: 0 18px;
+
+    border-radius: 10px;
+
+    background: #f1f3f4;
+    color: #536068;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease;
+}
+
+.form-cancel:hover {
+    background: #e7eaec;
+}
+
+.form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+
+    min-width: 150px;
+    height: 45px;
+
+    box-sizing: border-box;
+
+    padding: 0 17px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #1f7a4d;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px rgba(31, 122, 77, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.form-submit:hover {
+    background: #19663f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 23px rgba(31, 122, 77, 0.22);
+}
+
+.submit-arrow {
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   SECURITY NOTE
+============================================================ */
+
+.form-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    color: #8a959b;
+
+    font-size: 11px;
+}
+
+.form-note p {
+    margin: 0;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .farm-carousel {
+        grid-auto-columns: calc((100% - 20px) / 2);
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .farm-page,
+    .farm-form-page {
+        width: 90%;
+        padding-top: 30px;
+    }
+
+
+    /* FARM HEADER */
+
+    .farm-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .farm-header h1 {
+        font-size: 30px;
+    }
+
+    .farm-header .btn {
+        width: 100%;
+    }
+
+
+    /* CAROUSEL */
+
+    .farm-carousel-wrapper {
+        gap: 7px;
+    }
+
+    .farm-carousel {
+        grid-auto-columns: 100%;
+
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .carousel-arrow {
+        width: 38px;
+        height: 38px;
+
+        font-size: 25px;
+    }
+
+    .carousel-indicator {
+        padding: 0 5px;
+    }
+
+    .carousel-hint {
+        display: none;
+    }
+
+
+    /* FARM CARD */
+
+    .farm-card {
+        padding: 20px;
+    }
+
+
+    /* FORM */
+
+    .heading-content h1 {
+        font-size: 29px;
+    }
+
+    .heading-icon {
+        width: 54px;
+        height: 54px;
+
+        font-size: 25px;
+    }
+
+    .form-card-header {
+        padding: 24px 20px;
+    }
+
+    .farm-form-card form {
+        padding: 25px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .form-cancel,
+    .form-submit {
+        width: 100%;
+    }
+
+
+    /* EMPTY STATE */
+
+    .empty-state {
+        padding: 45px 22px;
+    }
+
+}
+
+
+/* ============================================================
+FARM DELETE CONFIRMATION
+============================================================ */
+
+.delete-warning {
+    margin-top: 24px;
+    padding: 24px;
+    border: 1px solid #f0d6d6;
+    border-radius: 14px;
+    background: #fff8f8;
+}
+
+.delete-warning>p:first-child {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.delete-warning h3 {
+    margin: 0 0 22px;
+    color: #2d2d2d;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.delete-warning .detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.delete-warning .detail-row:last-of-type {
+    border-bottom: none;
+}
+
+.delete-warning .detail-label {
+    color: #777;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.delete-warning .detail-value {
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.delete-warning-text {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid #f0d6d6;
+    color: #b42318;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.farm-form-footer form {
+    margin: 0;
+}
+
+.farm-form-footer .btn-delete {
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+/* ============================================================
+   FARM DELETE CONFIRMATION
+============================================================ */
+
+.farm-delete-page {
+    width: min(1180px, 92%);
+    min-height: 62vh;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 0 70px;
+}
+
+
+/* ------------------------------------------------------------
+   CONFIRMATION CARD
+------------------------------------------------------------ */
+
+.delete-confirm-card {
+    width: min(480px, 100%);
+
+    padding: 42px 42px 38px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ------------------------------------------------------------
+   ICON
+------------------------------------------------------------ */
+
+.delete-confirm-icon {
+    width: 54px;
+    height: 54px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff4f4;
+    border: 1px solid #f1d5d5;
+
+    color: #c93636;
+
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+
+/* ------------------------------------------------------------
+   TITLE
+------------------------------------------------------------ */
+
+.delete-confirm-card h1 {
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 1.65rem;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* ------------------------------------------------------------
+   FARM NAME
+------------------------------------------------------------ */
+
+.delete-confirm-farm {
+    margin: 10px 0 0;
+
+    color: #333333;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+/* ------------------------------------------------------------
+   DESCRIPTION
+------------------------------------------------------------ */
+
+.delete-confirm-description {
+    max-width: 350px;
+
+    margin: 14px auto 0;
+
+    color: #777777;
+
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+
+/* ------------------------------------------------------------
+   ACTIONS
+------------------------------------------------------------ */
+
+.delete-confirm-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.delete-confirm-actions form {
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   CANCEL BUTTON
+------------------------------------------------------------ */
+
+.delete-cancel-btn {
+    min-width: 115px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 20px;
+
+    border: 1px solid #dddddd;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #444444;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.delete-cancel-btn:hover {
+    background: #f8f8f8;
+    border-color: #cccccc;
+}
+
+
+/* ------------------------------------------------------------
+   DELETE BUTTON
+------------------------------------------------------------ */
+
+.delete-confirm-btn {
+    min-width: 125px;
+    height: 44px;
+
+    padding: 0 20px;
+
+    border: 1px solid #c93636;
+    border-radius: 9px;
+
+    background: #c93636;
+    color: #ffffff;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.delete-confirm-btn:hover {
+    background: #ae2b2b;
+    border-color: #ae2b2b;
+
+    box-shadow:
+        0 5px 14px rgba(174, 43, 43, 0.16);
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .farm-delete-page {
+        width: min(92%, 480px);
+
+        min-height: 55vh;
+
+        padding: 35px 0 50px;
+    }
+
+    .delete-confirm-card {
+        padding: 34px 24px 30px;
+
+        border-radius: 15px;
+    }
+
+    .delete-confirm-icon {
+        width: 48px;
+        height: 48px;
+
+        margin-bottom: 18px;
+    }
+
+    .delete-confirm-card h1 {
+        font-size: 1.45rem;
+    }
+
+    .delete-confirm-description {
+        font-size: 0.86rem;
+    }
+
+    .delete-confirm-actions {
+        flex-direction: column-reverse;
+
+        width: 100%;
+    }
+
+    .delete-confirm-actions form,
+    .delete-confirm-btn,
+    .delete-cancel-btn {
+        width: 100%;
+    }
+
+}

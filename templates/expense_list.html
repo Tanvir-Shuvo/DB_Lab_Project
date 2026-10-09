@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Expenses | Poultry Management{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/expense.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="expense-page">
+
+<div class="page-header">
+    <div>
+        <h1>Expenses</h1>
+        <p>Manage farm and batch expenses.</p>
+    </div>
+
+    <a href="{% url 'expense_create' %}" class="btn btn-primary">
+        + Add Expense
+    </a>
+</div>
+
+
+<div class="table-card">
+
+    {% if expenses %}
+
+    <div class="table-wrapper">
+
+        <table class="expense-table">
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Farm</th>
+                    <th>Batch</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for expense in expenses %}
+
+                <tr>
+
+                    <td>
+                        {{ expense.expense_date }}
+                    </td>
+
+                    <td>
+                        {{ expense.farm_name }}
+                    </td>
+
+                    <td>
+                        {% if expense.batch_code %}
+                            {{ expense.batch_code }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <span class="type-badge {{ expense.expense_type|lower }}">
+                            {{ expense.expense_type }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ expense.category }}
+                    </td>
+
+                    <td class="amount">
+                        {{ expense.amount }}
+                    </td>
+
+                    <td>
+                        {% if expense.description %}
+                            {{ expense.description }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                    <td class="actions">
+
+                        <a
+                            href="{% url 'expense_update' expense.id %}"
+                            class="btn btn-edit"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="{% url 'expense_delete' expense.id %}"
+                            class="btn btn-delete"
+                        >
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h3>No expenses found</h3>
+
+        <p>
+            You have not added any expense yet.
+        </p>
+
+        <a
+            href="{% url 'expense_create' %}"
+            class="btn btn-primary"
+        >
+            Add Your First Expense
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</section>
+
+{% endblock %}

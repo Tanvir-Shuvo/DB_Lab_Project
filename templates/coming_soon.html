@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Coming Soon | Poultry Management{% endblock %}
+
+{% block content %}
+
+<div style="
+    width: min(700px, 92%);
+    min-height: 60vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+">
+
+    <div>
+
+        <div style="
+            font-size: 3rem;
+            margin-bottom: 18px;
+        ">
+            🐔
+        </div>
+
+        <h1 style="
+            margin: 0 0 12px;
+            font-size: 2rem;
+        ">
+            Coming Soon
+        </h1>
+
+        <p style="
+            margin: 0 0 25px;
+            color: #777;
+            line-height: 1.7;
+        ">
+            This management module is currently being developed.
+        </p>
+
+        <a href="{% url 'home' %}" style="
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 11px 22px;
+                border-radius: 9px;
+                background: #222;
+                color: #fff;
+                text-decoration: none;
+                font-weight: 600;
+            ">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

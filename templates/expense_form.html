@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} | Poultry Management{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/expense.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="expense-page">
+
+
+<div class="page-header">
+
+    <div>
+        <h1>{{ page_title }}</h1>
+        <p>Enter expense information below.</p>
+    </div>
+
+    <a
+        href="{% url 'expense_list' %}"
+        class="btn btn-secondary"
+    >
+        Back to Expenses
+    </a>
+
+</div>
+
+
+<div class="form-card">
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- FARM -->
+
+        <div class="form-group">
+
+            <label for="farm_id">
+                Farm
+            </label>
+
+            <select
+                name="farm_id"
+                id="farm_id"
+                required
+            >
+
+                <option value="">
+                    Select Farm
+                </option>
+
+                {% for farm in farms %}
+
+                <option
+                    value="{{ farm.id }}"
+                    {% if expense and expense.farm_id == farm.id %}
+                        selected
+                    {% endif %}
+                >
+                    {{ farm.name }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- EXPENSE TYPE -->
+
+        <div class="form-group">
+
+            <label for="expense_type">
+                Expense Type
+            </label>
+
+            <select
+                name="expense_type"
+                id="expense_type"
+                required
+            >
+
+                <option value="">
+                    Select Type
+                </option>
+
+                <option
+                    value="FARM"
+                    {% if expense and expense.expense_type == "FARM" %}
+                        selected
+                    {% endif %}
+                >
+                    Farm Expense
+                </option>
+
+                <option
+                    value="BATCH"
+                    {% if expense and expense.expense_type == "BATCH" %}
+                        selected
+                    {% endif %}
+                >
+                    Batch Expense
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- BATCH -->
+
+        <div
+            class="form-group"
+            id="batch-group"
+        >
+
+            <label for="batch_id">
+                Batch
+            </label>
+
+            <select
+                name="batch_id"
+                id="batch_id"
+            >
+
+                <option value="">
+                    Select Batch
+                </option>
+
+                {% for batch in batches %}
+
+                <option
+                    value="{{ batch.id }}"
+                    data-farm-id="{{ batch.farm_id }}"
+                    {% if expense and expense.batch_id == batch.id %}
+                        selected
+                    {% endif %}
+                >
+                    {{ batch.farm_name }} — {{ batch.code }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <small>
+                Batch is required for a batch expense.
+            </small>
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+            <label for="category">
+                Category
+            </label>
+
+            <input
+                type="text"
+                name="category"
+                id="category"
+                placeholder="e.g. Feed, Medicine, Electricity"
+                value="{% if expense %}{{ expense.category }}{% endif %}"
+                required
+            >
+
+        </div>
+
+
+        <!-- AMOUNT -->
+
+        <div class="form-group">
+
+            <label for="amount">
+                Amount
+            </label>
+
+            <input
+                type="number"
+                name="amount"
+                id="amount"
+                step="0.01"
+                min="0"
+                placeholder="Enter amount"
+                value="{% if expense %}{{ expense.amount }}{% endif %}"
+                required
+            >
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div class="form-group">
+
+            <label for="expense_date">
+                Expense Date
+            </label>
+
+            <input
+                type="date"
+                name="expense_date"
+                id="expense_date"
+                value="{% if expense %}{{ expense.expense_date|date:'Y-m-d' }}{% endif %}"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                name="description"
+                id="description"
+                rows="4"
+                placeholder="Optional description"
+            >{% if expense %}{{ expense.description }}{% endif %}</textarea>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="{% url 'expense_list' %}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                {{ button_text }}
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</section>
+
+<script>
+
+    const expenseType = document.getElementById("expense_type");
+    const batchGroup = document.getElementById("batch-group");
+    const batchSelect = document.getElementById("batch_id");
+    const farmSelect = document.getElementById("farm_id");
+
+
+    function updateBatchVisibility() {
+
+        const type = expenseType.value;
+        const selectedFarm = farmSelect.value;
+
+
+        if (type === "BATCH") {
+
+            batchGroup.style.display = "block";
+
+            batchSelect.required = true;
+
+
+            Array.from(batchSelect.options).forEach(function(option) {
+
+                if (!option.value) {
+                    return;
+                }
+
+                const batchFarm = option.dataset.farmId;
+
+
+                if (
+                    selectedFarm &&
+                    batchFarm === selectedFarm
+                ) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+
+            });
+
+
+        } else {
+
+            batchGroup.style.display = "none";
+
+            batchSelect.required = false;
+
+            batchSelect.value = "";
+
+        }
+
+    }
+
+
+    expenseType.addEventListener(
+        "change",
+        updateBatchVisibility
+    );
+
+
+    farmSelect.addEventListener(
+        "change",
+        updateBatchVisibility
+    );
+
+
+    updateBatchVisibility();
+
+</script>
+
+{% endblock %}

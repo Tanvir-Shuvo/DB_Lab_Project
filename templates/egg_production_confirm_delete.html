@@ -1,0 +1,84 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Delete Egg Production{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/egg_production.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="egg-delete-page">
+
+    <div class="egg-delete-card">
+
+        <h1>Delete Egg Production</h1>
+
+        <p>
+            Are you sure you want to delete this egg production record?
+        </p>
+
+
+        <div class="egg-delete-info">
+
+            <p>
+                <strong>Date:</strong>
+                {{ egg_production.production_date }}
+            </p>
+
+            <p>
+                <strong>Farm:</strong>
+                {{ egg_production.farm_name }}
+            </p>
+
+            <p>
+                <strong>Batch:</strong>
+                {{ egg_production.batch_code }}
+            </p>
+
+            <p>
+                <strong>Total Eggs:</strong>
+                {{ egg_production.egg_count }}
+            </p>
+
+            <p>
+                <strong>Damaged Eggs:</strong>
+                {{ egg_production.damaged_egg_count }}
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="egg-form-actions">
+
+                <a
+                    href="{% url 'egg_production_list' %}"
+                    class="egg-btn egg-btn-secondary"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="egg-btn egg-btn-danger"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

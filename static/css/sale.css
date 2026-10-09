@@ -1,0 +1,418 @@
+/* ============================================================
+   SALE PAGE
+   ============================================================ */
+
+.sale-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.sale-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.sale-header h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+}
+
+.sale-header p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.sale-card,
+.sale-form-card,
+.sale-delete-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.sale-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.sale-card-header h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.sale-count {
+    font-size: 14px;
+    opacity: 0.65;
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.sale-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.sale-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
+
+.sale-table th,
+.sale-table td {
+    padding: 13px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.sale-table th {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: #f8fafc;
+}
+
+.sale-table td {
+    font-size: 14px;
+}
+
+.sale-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+
+.sale-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.sale-badge-poultry {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.sale-badge-egg {
+    background: #fff8e1;
+    color: #8d6e00;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.sale-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
+
+.sale-btn:hover {
+    transform: translateY(-1px);
+}
+
+.sale-btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.sale-btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.sale-btn-secondary {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+.sale-btn-secondary:hover {
+    background: #d1d5db;
+}
+
+.sale-btn-edit {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.sale-btn-edit:hover {
+    background: #bae6fd;
+}
+
+.sale-btn-delete,
+.sale-btn-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.sale-btn-delete:hover,
+.sale-btn-danger:hover {
+    background: #fecaca;
+}
+
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+
+.sale-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.sale-empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.sale-empty-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.sale-empty h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.sale-empty p {
+    margin: 0 0 20px;
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.sale-form-card {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.sale-form-group {
+    margin-bottom: 20px;
+}
+
+.sale-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sale-form-group input,
+.sale-form-group select,
+.sale-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.sale-form-group input:focus,
+.sale-form-group select:focus,
+.sale-form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.sale-form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+
+.sale-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+
+/* ============================================================
+   DELETE PAGE
+   ============================================================ */
+
+.sale-delete-card {
+    max-width: 650px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.sale-delete-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.sale-delete-card h2 {
+    margin: 0 0 10px;
+    font-size: 25px;
+}
+
+.sale-delete-message {
+    margin: 0 auto 25px;
+    max-width: 500px;
+    line-height: 1.6;
+    opacity: 0.75;
+}
+
+
+/* ============================================================
+   DELETE DETAILS
+   ============================================================ */
+
+.sale-delete-details {
+    margin: 25px 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.sale-detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sale-detail-row:last-child {
+    border-bottom: none;
+}
+
+.sale-detail-label {
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.sale-detail-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+
+/* ============================================================
+   DELETE ACTIONS
+   ============================================================ */
+
+.sale-delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .sale-page {
+        padding: 20px 12px;
+    }
+
+    .sale-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sale-header h1 {
+        font-size: 25px;
+    }
+
+    .sale-card,
+    .sale-form-card,
+    .sale-delete-card {
+        padding: 18px;
+    }
+
+    .sale-form-actions,
+    .sale-delete-actions {
+        flex-direction: column-reverse;
+    }
+
+    .sale-form-actions .sale-btn,
+    .sale-delete-actions .sale-btn {
+        width: 100%;
+    }
+
+    .sale-detail-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .sale-detail-value {
+        text-align: left;
+    }
+
+}

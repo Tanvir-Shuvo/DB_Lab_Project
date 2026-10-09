@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Daily Records | Smart Poultry Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/record.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="record-page">
+
+    <div class="record-header">
+        <div>
+            <h1>Daily Records</h1>
+            <p>
+                Track daily poultry health, feed, water, medicine, and mortality records.
+            </p>
+        </div>
+
+        <a href="{% url 'daily_record_create' %}" class="record-btn record-btn-primary">
+            + Add Daily Record
+        </a>
+    </div>
+
+
+    {% if records %}
+
+    <div class="record-list-container">
+
+        <div class="record-table-wrapper">
+
+            <table class="record-table">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Farm</th>
+                        <th>Batch</th>
+                        <th>Feed</th>
+                        <th>Water</th>
+                        <th>Dead</th>
+                        <th>Sick</th>
+                        <th>Medicine</th>
+                        <th>Medicine Qty.</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+
+                        <td>
+                            <span class="record-date">
+                                {{ record.record_date }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="record-farm">
+                                {{ record.farm_name }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="record-batch">
+                                {{ record.batch_code }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ record.feed_amount_kg }} kg
+                        </td>
+
+                        <td>
+                            {{ record.water_liters }} L
+                        </td>
+
+                        <td>
+                            {{ record.dead_count }}
+                        </td>
+
+                        <td>
+                            {{ record.sick_count }}
+                        </td>
+
+                        <td>
+
+                            {% if record.medicine_used %}
+
+                            <span class="record-status active">
+                                Yes
+                            </span>
+
+                            {% else %}
+
+                            <span class="record-status inactive">
+                                No
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if record.medicine_quantity %}
+                                {{ record.medicine_quantity }}
+                            {% else %}
+                                —
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if record.notes %}
+                                {{ record.notes }}
+                            {% else %}
+                                —
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="record-actions">
+
+                                <a href="{% url 'daily_record_update' record.id %}"
+                                   class="record-action-btn record-action-edit">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'daily_record_delete' record.id %}"
+                                   class="record-action-btn record-action-delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="record-empty">
+
+        <div class="record-empty-icon">
+            📋
+        </div>
+
+        <h3>No Daily Records Yet</h3>
+
+        <p>
+            You haven't created any daily records yet.
+            Add your first record to start tracking daily poultry activities.
+        </p>
+
+        <a href="{% url 'daily_record_create' %}" class="record-btn record-btn-primary">
+            + Add Your First Record
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

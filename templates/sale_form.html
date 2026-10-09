@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sale.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="sale-page">
+
+    <!-- ================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ================================================== -->
+
+    <div class="sale-header">
+
+        <div>
+            <h1>{{ page_title }}</h1>
+            <p>Record poultry or egg sales.</p>
+        </div>
+
+        <a href="{% url 'sale_list' %}" class="sale-btn sale-btn-secondary">
+            ← Back to Sales
+        </a>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- SALE FORM -->
+    <!-- ================================================== -->
+
+    <div class="sale-form-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- ================================================== -->
+            <!-- FARM -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="farm_id">
+                    Farm
+                </label>
+
+                <select
+                    name="farm_id"
+                    id="farm_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Farm
+                    </option>
+
+                    {% for farm in farms %}
+
+                    <option
+                        value="{{ farm.id }}"
+                        {% if sale and sale.farm_id == farm.id %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ farm.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- BATCH -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="batch_id">
+                    Batch
+                </label>
+
+                <select
+                    name="batch_id"
+                    id="batch_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Batch
+                    </option>
+
+                    {% for batch in batches %}
+
+                    <option
+                        value="{{ batch.id }}"
+                        data-farm-id="{{ batch.farm_id }}"
+                        {% if sale and sale.batch_id == batch.id %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ batch.code }} — {{ batch.farm_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- SALE TYPE -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="sale_type">
+                    Sale Type
+                </label>
+
+                <select
+                    name="sale_type"
+                    id="sale_type"
+                    required
+                >
+
+                    <option value="">
+                        Select Sale Type
+                    </option>
+
+                    <option
+                        value="POULTRY"
+                        {% if sale and sale.sale_type == "POULTRY" %}
+                            selected
+                        {% endif %}
+                    >
+                        Poultry
+                    </option>
+
+                    <option
+                        value="EGG"
+                        {% if sale and sale.sale_type == "EGG" %}
+                            selected
+                        {% endif %}
+                    >
+                        Egg
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- UNIT -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="unit">
+                    Unit
+                </label>
+
+                <select
+                    name="unit"
+                    id="unit"
+                    required
+                >
+
+                    <option value="">
+                        Select Unit
+                    </option>
+
+                    <option
+                        value="BIRD"
+                        {% if sale and sale.unit == "BIRD" %}
+                            selected
+                        {% endif %}
+                    >
+                        Bird
+                    </option>
+
+                    <option
+                        value="EGG"
+                        {% if sale and sale.unit == "EGG" %}
+                            selected
+                        {% endif %}
+                    >
+                        Egg
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- QUANTITY -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="quantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    min="0"
+                    step="0.01"
+                    value="{% if sale %}{{ sale.quantity }}{% endif %}"
+                    placeholder="Enter quantity"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- UNIT PRICE -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="unit_price">
+                    Unit Price
+                </label>
+
+                <input
+                    type="number"
+                    name="unit_price"
+                    id="unit_price"
+                    min="0"
+                    step="0.01"
+                    value="{% if sale %}{{ sale.unit_price }}{% endif %}"
+                    placeholder="Enter unit price"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- SALE DATE -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="sale_date">
+                    Sale Date
+                </label>
+
+                <input
+                    type="date"
+                    name="sale_date"
+                    id="sale_date"
+                    value="{% if sale %}{{ sale.sale_date|date:'Y-m-d' }}{% endif %}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- BUYER -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="buyer_name">
+                    Buyer Name
+                </label>
+
+                <input
+                    type="text"
+                    name="buyer_name"
+                    id="buyer_name"
+                    value="{% if sale %}{{ sale.buyer_name }}{% endif %}"
+                    placeholder="Enter buyer name"
+                >
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- NOTES -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-group">
+
+                <label for="notes">
+                    Notes
+                </label>
+
+                <textarea
+                    name="notes"
+                    id="notes"
+                    rows="4"
+                    placeholder="Optional notes"
+                >{% if sale %}{{ sale.notes }}{% endif %}</textarea>
+
+            </div>
+
+
+            <!-- ================================================== -->
+            <!-- FORM ACTIONS -->
+            <!-- ================================================== -->
+
+            <div class="sale-form-actions">
+
+                <a
+                    href="{% url 'sale_list' %}"
+                    class="sale-btn sale-btn-secondary"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="sale-btn sale-btn-primary"
+                >
+                    {{ button_text }}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================== -->
+<!-- BATCH FILTER SCRIPT -->
+<!-- ================================================== -->
+
+<script>
+
+    const farmSelect = document.getElementById("farm_id");
+    const batchSelect = document.getElementById("batch_id");
+
+    function filterBatches() {
+
+        const selectedFarmId = farmSelect.value;
+
+        const options = batchSelect.querySelectorAll("option");
+
+        options.forEach(function(option) {
+
+            if (!option.value) {
+                option.style.display = "";
+                return;
+            }
+
+            const batchFarmId = option.dataset.farmId;
+
+            if (
+                selectedFarmId &&
+                batchFarmId === selectedFarmId
+            ) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+
+                if (option.selected) {
+                    option.selected = false;
+                }
+            }
+
+        });
+
+    }
+
+    farmSelect.addEventListener(
+        "change",
+        filterBatches
+    );
+
+    filterBatches();
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,589 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <div>
+            <h1>Search Results</h1>
+
+            {% if keyword %}
+                <p>
+                    Search results for:
+                    <strong>"{{ keyword }}"</strong>
+                </p>
+            {% else %}
+                <p>Enter a keyword to search your poultry data.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEARCH FORM
+    ====================================================== -->
+
+    <div class="card">
+
+        <form method="get" action="{% url 'search' %}">
+
+            <div class="form-group">
+
+                <label for="search">
+                    Search
+                </label>
+
+                <input
+                    type="text"
+                    id="search"
+                    name="q"
+                    value="{{ keyword }}"
+                    placeholder="Search farms, batches, records, expenses, sales..."
+                    required
+                >
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         RESULT SUMMARY
+    ====================================================== -->
+
+    {% if keyword %}
+
+        <div class="search-summary">
+
+            <p>
+                <strong>{{ total_results }}</strong>
+                result{{ total_results|pluralize }} found.
+            </p>
+
+        </div>
+
+
+        {% if total_results == 0 %}
+
+            <div class="card">
+
+                <h3>No results found</h3>
+
+                <p>
+                    No matching records were found for
+                    <strong>"{{ keyword }}"</strong>.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             FARM RESULTS
+        ================================================== -->
+
+        {% if results.farms %}
+
+            <div class="card">
+
+                <h2>Farms</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>Capacity</th>
+                                <th>Start Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for farm in results.farms %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ farm.name }}
+                                    </td>
+
+                                    <td>
+                                        {{ farm.location }}
+                                    </td>
+
+                                    <td>
+                                        {{ farm.farm_type }}
+                                    </td>
+
+                                    <td>
+                                        {{ farm.capacity }}
+                                    </td>
+
+                                    <td>
+                                        {{ farm.start_date }}
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'farm_update' farm.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             BATCH RESULTS
+        ================================================== -->
+
+        {% if results.batches %}
+
+            <div class="card">
+
+                <h2>Batches</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Farm</th>
+                                <th>Poultry Type</th>
+                                <th>Start Date</th>
+                                <th>Bird Count</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for batch in results.batches %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ batch.code }}
+                                    </td>
+
+                                    <td>
+                                        {{ batch.farm_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ batch.poultry_type }}
+                                    </td>
+
+                                    <td>
+                                        {{ batch.start_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ batch.initial_bird_count }}
+                                    </td>
+
+                                    <td>
+
+                                        {% if batch.is_active %}
+                                            Active
+                                        {% else %}
+                                            Inactive
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'batch_update' batch.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             DAILY RECORD RESULTS
+        ================================================== -->
+
+        {% if results.daily_records %}
+
+            <div class="card">
+
+                <h2>Daily Records</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farm</th>
+                                <th>Batch</th>
+                                <th>Feed (kg)</th>
+                                <th>Water (L)</th>
+                                <th>Dead Birds</th>
+                                <th>Sick Birds</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for record in results.daily_records %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ record.record_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.farm_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.batch_code }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.feed_amount_kg }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.water_liters }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.dead_birds }}
+                                    </td>
+
+                                    <td>
+                                        {{ record.sick_birds }}
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'daily_record_update' record.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             EGG PRODUCTION RESULTS
+        ================================================== -->
+
+        {% if results.egg_productions %}
+
+            <div class="card">
+
+                <h2>Egg Production</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farm</th>
+                                <th>Batch</th>
+                                <th>Total Eggs</th>
+                                <th>Damaged Eggs</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for egg in results.egg_productions %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ egg.production_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ egg.farm_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ egg.batch_code }}
+                                    </td>
+
+                                    <td>
+                                        {{ egg.egg_count }}
+                                    </td>
+
+                                    <td>
+                                        {{ egg.damaged_egg_count }}
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'egg_production_update' egg.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             EXPENSE RESULTS
+        ================================================== -->
+
+        {% if results.expenses %}
+
+            <div class="card">
+
+                <h2>Expenses</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Farm</th>
+                                <th>Batch</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for expense in results.expenses %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ expense.expense_type }}
+                                    </td>
+
+                                    <td>
+                                        {{ expense.farm_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ expense.batch_code }}
+                                    </td>
+
+                                    <td>
+                                        {{ expense.amount }}
+                                    </td>
+
+                                    <td>
+                                        {{ expense.expense_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ expense.description }}
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'expense_update' expense.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             SALE RESULTS
+        ================================================== -->
+
+        {% if results.sales %}
+
+            <div class="card">
+
+                <h2>Sales</h2>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Farm</th>
+                                <th>Batch</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Date</th>
+                                <th>Buyer</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for sale in results.sales %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ sale.sale_type }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.farm_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.batch_code }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.unit }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.quantity }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.unit_price }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.sale_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ sale.buyer_name }}
+                                    </td>
+
+                                    <td>
+                                        <a
+                                            href="{% url 'sale_update' sale.id %}"
+                                            class="btn btn-primary"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

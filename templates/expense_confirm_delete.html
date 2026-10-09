@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Expense | Poultry Management{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/expense.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="expense-page">
+
+
+<div class="page-header">
+
+    <div>
+        <h1>Delete Expense</h1>
+
+        <p>
+            Confirm that you want to delete this expense.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="delete-card">
+
+    <div class="delete-warning">
+
+        <h2>Are you sure?</h2>
+
+        <p>
+            This action will permanently delete the selected expense.
+        </p>
+
+    </div>
+
+
+    <div class="expense-summary">
+
+        <div class="summary-row">
+            <span>Farm</span>
+
+            <strong>
+                {{ expense.farm_name }}
+            </strong>
+        </div>
+
+
+        <div class="summary-row">
+            <span>Batch</span>
+
+            <strong>
+
+                {% if expense.batch_code %}
+                    {{ expense.batch_code }}
+                {% else %}
+                    —
+                {% endif %}
+
+            </strong>
+        </div>
+
+
+        <div class="summary-row">
+            <span>Type</span>
+
+            <strong>
+                {{ expense.expense_type }}
+            </strong>
+        </div>
+
+
+        <div class="summary-row">
+            <span>Category</span>
+
+            <strong>
+                {{ expense.category }}
+            </strong>
+        </div>
+
+
+        <div class="summary-row">
+            <span>Amount</span>
+
+            <strong>
+                {{ expense.amount }}
+            </strong>
+        </div>
+
+
+        <div class="summary-row">
+            <span>Date</span>
+
+            <strong>
+                {{ expense.expense_date }}
+            </strong>
+        </div>
+
+
+        {% if expense.description %}
+
+        <div class="summary-row">
+            <span>Description</span>
+
+            <strong>
+                {{ expense.description }}
+            </strong>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-actions">
+
+            <a
+                href="{% url 'expense_list' %}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-danger"
+            >
+                Yes, Delete
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</section>
+
+{% endblock %}

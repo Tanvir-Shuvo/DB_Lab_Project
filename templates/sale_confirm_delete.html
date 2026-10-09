@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Sale{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sale.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="sale-page">
+
+    <!-- ================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ================================================== -->
+
+    <div class="sale-header">
+
+        <div>
+            <h1>Delete Sale</h1>
+            <p>Confirm before deleting this sales record.</p>
+        </div>
+
+        <a
+            href="{% url 'sale_list' %}"
+            class="sale-btn sale-btn-secondary"
+        >
+            ← Back to Sales
+        </a>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- DELETE CARD -->
+    <!-- ================================================== -->
+
+    <div class="sale-delete-card">
+
+        <div class="sale-delete-icon">
+            ⚠️
+        </div>
+
+        <h2>Are you sure?</h2>
+
+        <p class="sale-delete-message">
+            You are about to permanently delete this sales record.
+            This action cannot be undone.
+        </p>
+
+
+        <!-- ================================================== -->
+        <!-- SALE DETAILS -->
+        <!-- ================================================== -->
+
+        <div class="sale-delete-details">
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Farm
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.farm_name }}
+                </span>
+
+            </div>
+
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Batch
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.batch_code }}
+                </span>
+
+            </div>
+
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Sale Type
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.sale_type }}
+                </span>
+
+            </div>
+
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Quantity
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.quantity }} {{ sale.unit }}
+                </span>
+
+            </div>
+
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Unit Price
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.unit_price }}
+                </span>
+
+            </div>
+
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Sale Date
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.sale_date|date:"d M Y" }}
+                </span>
+
+            </div>
+
+
+            {% if sale.buyer_name %}
+
+            <div class="sale-detail-row">
+
+                <span class="sale-detail-label">
+                    Buyer
+                </span>
+
+                <span class="sale-detail-value">
+                    {{ sale.buyer_name }}
+                </span>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ================================================== -->
+        <!-- ACTIONS -->
+        <!-- ================================================== -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="sale-delete-actions">
+
+                <a
+                    href="{% url 'sale_list' %}"
+                    class="sale-btn sale-btn-secondary"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="sale-btn sale-btn-danger"
+                >
+                    Delete Sale
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

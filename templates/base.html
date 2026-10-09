@@ -1,0 +1,309 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>{% block title %}Poultry Management{% endblock %}</title>
+
+<meta name="description"
+    content="A modern poultry farm management platform for organizing farms, batches, daily records, production, expenses and sales.">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block extra_css %}
+{% endblock %}
+
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     TOP BAR
+     ========================= -->
+<header class="site-header">
+
+    <nav class="navbar">
+
+        <!-- BRAND -->
+
+        <a href="{% url 'home' %}" class="brand">
+            <span class="brand-icon">🐔</span>
+            <span>Poultry Management</span>
+        </a>
+
+
+        <!-- =========================
+             PUBLIC TOP ACTIONS
+             ========================= -->
+
+        {% if not user.is_authenticated %}
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'login' %}"
+                    class="login-link"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="nav-button"
+                >
+                    Register
+                </a>
+
+            </div>
+
+
+        <!-- =========================
+             LOGGED-IN TOP ACTIONS
+             ========================= -->
+
+        {% else %}
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="login-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     PUBLIC NAVIGATION
+     ========================= -->
+
+{% if not user.is_authenticated %}
+
+    <div class="public-navigation">
+
+        <nav class="secondary-navbar">
+
+            <a
+                href="{% url 'home' %}"
+                class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+            >
+                Home
+            </a>
+
+            <a href="{% url 'home' %}#features">
+                Features
+            </a>
+
+            <a href="{% url 'home' %}#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+
+<!-- =========================
+     LOGGED-IN MANAGEMENT MENU
+     ========================= -->
+
+{% else %}
+
+    <div class="management-navigation">
+
+        <nav class="secondary-navbar">
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+            >
+                🏠 Dashboard
+            </a>
+
+            <a
+                href="{% url 'farm_list' %}"
+                class="{% if request.resolver_match.url_name == 'farm_list' or request.resolver_match.url_name == 'farm_create' or request.resolver_match.url_name == 'farm_update' or request.resolver_match.url_name == 'farm_delete' %}active{% endif %}"
+            >
+                🌾 Farms
+            </a>
+
+            <a
+                href="{% url 'batch_list' %}"
+                class="{% if request.resolver_match.url_name == 'batch_list' or request.resolver_match.url_name == 'batch_create' or request.resolver_match.url_name == 'batch_update' or request.resolver_match.url_name == 'batch_delete' %}active{% endif %}"
+            >
+                🐔 Batches
+            </a>
+
+            <a
+                href="{% url 'daily_record_list' %}"
+                class="{% if request.resolver_match.url_name == 'daily_record_list' or request.resolver_match.url_name == 'daily_record_create' or request.resolver_match.url_name == 'daily_record_update' or request.resolver_match.url_name == 'daily_record_delete' %}active{% endif %}"
+            >
+                📋 Daily Records
+            </a>
+
+            <a
+                href="{% url 'egg_production_list' %}"
+                class="{% if request.resolver_match.url_name == 'egg_production_list' or request.resolver_match.url_name == 'egg_production_create' or request.resolver_match.url_name == 'egg_production_update' or request.resolver_match.url_name == 'egg_production_delete' %}active{% endif %}"
+            >
+                🥚 Egg Production
+            </a>
+
+            <a
+                href="{% url 'expense_list' %}"
+                class="{% if request.resolver_match.url_name == 'expense_list' or request.resolver_match.url_name == 'expense_create' or request.resolver_match.url_name == 'expense_update' or request.resolver_match.url_name == 'expense_delete' %}active{% endif %}"
+            >
+                💰 Expenses
+            </a>
+
+            <a
+                href="{% url 'sale_list' %}"
+                class="{% if request.resolver_match.url_name == 'sale_list' or request.resolver_match.url_name == 'sale_create' or request.resolver_match.url_name == 'sale_update' or request.resolver_match.url_name == 'sale_delete' %}active{% endif %}"
+            >
+                💵 Sales
+            </a>
+
+        </nav>
+
+    </div>
+
+{% endif %}
+
+
+<!-- =========================
+     MAIN CONTENT
+     ========================= -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+
+<footer class="site-footer" id="about">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                <span>🐔</span>
+                <strong>Poultry Management</strong>
+            </div>
+
+            <p>
+                A simple and organized way to manage
+                your poultry operation.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            {% if not user.is_authenticated %}
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'home' %}#features">
+                    Features
+                </a>
+
+                <a href="{% url 'home' %}#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}">
+                    Register
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'farm_list' %}">
+                    Farms
+                </a>
+
+                <a href="{% url 'batch_list' %}">
+                    Batches
+                </a>
+
+                <a href="{% url 'daily_record_list' %}">
+                    Daily Records
+                </a>
+
+                <a href="{% url 'egg_production_list' %}">
+                    Egg Production
+                </a>
+
+                <a href="{% url 'expense_list' %}">
+                    Expenses
+                </a>
+
+                <a href="{% url 'sale_list' %}">
+                    Sales
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Poultry Management. All rights reserved.
+        </p>
+
+        <p>
+            Farm • Batch • Records • Production • Finance
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

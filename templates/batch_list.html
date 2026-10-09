@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Batches | Smart Poultry Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/batch.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="batch-page">
+
+    <div class="batch-header">
+        <div>
+            <h1>My Batches</h1>
+            <p>
+                Manage and monitor all poultry batches across your farms.
+            </p>
+        </div>
+
+        <a href="{% url 'batch_create' %}" class="batch-btn batch-btn-primary">
+            + Create New Batch
+        </a>
+    </div>
+
+
+    {% if batches %}
+
+    <div class="batch-list-container">
+
+        <div class="batch-table-wrapper">
+
+            <table class="batch-table">
+
+                <thead>
+                    <tr>
+                        <th>Batch Code</th>
+                        <th>Farm</th>
+                        <th>Poultry Type</th>
+                        <th>Start Date</th>
+                        <th>Initial Birds</th>
+                        <th>Price / Bird</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for batch in batches %}
+
+                    <tr>
+
+                        <td>
+                            <span class="batch-code">
+                                {{ batch.code }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="batch-farm">
+                                {{ batch.farm_name }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="batch-type">
+                                {{ batch.poultry_type }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ batch.start_date }}
+                        </td>
+
+                        <td>
+                            {{ batch.initial_bird_count }}
+                        </td>
+
+                        <td>
+                            ৳ {{ batch.purchase_price_per_bird }}
+                        </td>
+
+                        <td>
+
+                            {% if batch.is_active %}
+
+                            <span class="batch-status active">
+                                Active
+                            </span>
+
+                            {% else %}
+
+                            <span class="batch-status inactive">
+                                Inactive
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="batch-actions">
+
+                                <a href="{% url 'batch_update' batch.id %}" class="batch-action-btn batch-action-edit">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'batch_delete' batch.id %}"
+                                    class="batch-action-btn batch-action-delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="batch-empty">
+
+        <div class="batch-empty-icon">
+            🐔
+        </div>
+
+        <h3>No Batches Yet</h3>
+
+        <p>
+            You haven't created any poultry batches yet.
+            Create your first batch to start managing your poultry production.
+        </p>
+
+        <a href="{% url 'batch_create' %}" class="batch-btn batch-btn-primary">
+            + Create Your First Batch
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

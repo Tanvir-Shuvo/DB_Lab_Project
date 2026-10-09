@@ -1,0 +1,163 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/egg_production.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="egg-form-page">
+
+    <div class="egg-form-header">
+
+        <h1>{{ page_title }}</h1>
+
+        <p>Enter the daily egg production information.</p>
+
+    </div>
+
+
+    <form method="POST" class="egg-form">
+
+        {% csrf_token %}
+
+
+        <div class="egg-form-row">
+
+            <div class="egg-form-group">
+
+                <label for="batch_id">
+                    Batch
+                </label>
+
+                <select
+                    id="batch_id"
+                    name="batch_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Batch
+                    </option>
+
+                    {% for batch in batches %}
+
+                    <option
+                        value="{{ batch.id }}"
+                        {% if egg_production and egg_production.batch_id == batch.id %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ batch.batch_code }} — {{ batch.farm_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="egg-form-group">
+
+                <label for="production_date">
+                    Production Date
+                </label>
+
+                <input
+                    type="date"
+                    id="production_date"
+                    name="production_date"
+                    value="{{ egg_production.production_date|date:'Y-m-d' }}"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="egg-form-row">
+
+            <div class="egg-form-group">
+
+                <label for="egg_count">
+                    Total Eggs
+                </label>
+
+                <input
+                    type="number"
+                    id="egg_count"
+                    name="egg_count"
+                    min="0"
+                    value="{{ egg_production.egg_count|default:'' }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="egg-form-group">
+
+                <label for="damaged_egg_count">
+                    Damaged Eggs
+                </label>
+
+                <input
+                    type="number"
+                    id="damaged_egg_count"
+                    name="damaged_egg_count"
+                    min="0"
+                    value="{{ egg_production.damaged_egg_count|default:'0' }}"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="egg-form-group">
+
+            <label for="notes">
+                Notes
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+            >{{ egg_production.notes|default:'' }}</textarea>
+
+        </div>
+
+
+        <div class="egg-form-actions">
+
+            <a
+                href="{% url 'egg_production_list' %}"
+                class="egg-btn egg-btn-secondary"
+            >
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="egg-btn egg-btn-primary"
+            >
+                {{ button_text }}
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+

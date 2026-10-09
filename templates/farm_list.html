@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}My Farms{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/farm.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="farm-page">
+
+    <!-- PAGE HEADER -->
+    <div class="farm-header">
+
+        <div>
+            <span class="farm-eyebrow">FARM MANAGEMENT</span>
+
+            <h1>My Farms</h1>
+
+            <p>
+                Manage all farms owned by your account.
+            </p>
+        </div>
+
+        <a href="{% url 'farm_create' %}" class="btn btn-primary">
+            + Add New Farm
+        </a>
+
+    </div>
+
+
+    {% if farms %}
+
+    <!-- CAROUSEL -->
+    <div class="farm-carousel-wrapper">
+
+        <button type="button" class="carousel-arrow carousel-prev" aria-label="Previous farms">
+            ‹
+        </button>
+
+
+        <div class="farm-carousel" id="farmCarousel">
+
+            {% for farm in farms %}
+
+            <div class="farm-card">
+
+                <!-- CARD HEADER -->
+                <div class="farm-card-header">
+
+                    <div class="farm-card-title">
+
+                        <h2>
+                            {{ farm.name }}
+                        </h2>
+
+                        <span class="farm-type">
+                            {{ farm.farm_type }}
+                        </span>
+
+                    </div>
+
+                    <div class="farm-card-icon">
+                        🐔
+                    </div>
+
+                </div>
+
+
+                <!-- CARD DETAILS -->
+                <div class="farm-details">
+
+                    <div class="detail-row">
+
+                        <span class="detail-label">
+                            Location
+                        </span>
+
+                        <span class="detail-value">
+                            {{ farm.location }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span class="detail-label">
+                            Capacity
+                        </span>
+
+                        <span class="detail-value">
+                            {{ farm.capacity }} birds
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span class="detail-label">
+                            Start Date
+                        </span>
+
+                        <span class="detail-value">
+                            {{ farm.start_date }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span class="detail-label">
+                            Created
+                        </span>
+
+                        <span class="detail-value">
+                            {{ farm.created_at|date:"d M Y" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD ACTIONS -->
+                <div class="farm-actions">
+
+                    <a href="{% url 'farm_update' farm.id %}" class="btn btn-edit">
+                        Edit
+                    </a>
+
+                    <a href="{% url 'farm_delete' farm.id %}" class="btn btn-delete">
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <button type="button" class="carousel-arrow carousel-next" aria-label="Next farms">
+            ›
+        </button>
+
+    </div>
+
+
+    <!-- CAROUSEL INDICATOR -->
+    <div class="carousel-indicator">
+
+        <span class="carousel-count">
+            {{ farms|length }} farm{{ farms|length|pluralize }}
+        </span>
+
+        <span class="carousel-hint">
+            ← Scroll to explore →
+        </span>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            🐔
+        </div>
+
+        <h2>No Farms Yet</h2>
+
+        <p>
+            You haven't created any farm yet.
+            Start by adding your first farm.
+        </p>
+
+        <a href="{% url 'farm_create' %}" class="btn btn-primary">
+            Create Your First Farm
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- CAROUSEL JS -->
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const carousel = document.getElementById("farmCarousel");
+
+        if (!carousel) {
+            return;
+        }
+
+        const previousButton =
+            document.querySelector(".carousel-prev");
+
+        const nextButton =
+            document.querySelector(".carousel-next");
+
+
+        function getScrollAmount() {
+
+            const card =
+                carousel.querySelector(".farm-card");
+
+            if (!card) {
+                return 0;
+            }
+
+            const cardWidth = card.offsetWidth;
+
+            const gap = 20;
+
+            return cardWidth + gap;
+        }
+
+
+        nextButton.addEventListener("click", function () {
+
+            carousel.scrollBy({
+                left: getScrollAmount(),
+                behavior: "smooth"
+            });
+
+        });
+
+
+        previousButton.addEventListener("click", function () {
+
+            carousel.scrollBy({
+                left: -getScrollAmount(),
+                behavior: "smooth"
+            });
+
+        });
+
+
+        function updateButtons() {
+
+            const maxScroll =
+                carousel.scrollWidth - carousel.clientWidth;
+
+            previousButton.disabled =
+                carousel.scrollLeft <= 5;
+
+            nextButton.disabled =
+                carousel.scrollLeft >= maxScroll - 5;
+
+        }
+
+
+        carousel.addEventListener(
+            "scroll",
+            updateButtons
+        );
+
+        window.addEventListener(
+            "resize",
+            updateButtons
+        );
+
+        updateButtons();
+
+    });
+
+</script>
+
+{% endblock %}
